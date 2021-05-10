@@ -6,7 +6,7 @@ import './AlbumList.css';
 class AlbumList extends Component {
 
   render() {
-    const { albums } = this.props
+    const { albums } = this.props;
     
     return (
       <ul className="AlbumList">

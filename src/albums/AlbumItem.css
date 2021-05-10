@@ -1,4 +1,4 @@
-.AlbumItem {
+.AlbumItem a {
   list-style: none;
   background: white;
   border: 1px solid darkgray;
@@ -9,6 +9,10 @@
   grid-gap: 10px;
 
   justify-items: center;
+
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 
 }
 
