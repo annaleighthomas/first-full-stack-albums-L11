@@ -7,11 +7,14 @@ export default class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <h2>Home Page</h2>
+        <header>
+          <h2>Home Page</h2>
+        </header>
 
-        <Link to='/resources'>See the List</Link>
+        <p>
+          <Link to='/albums'>See the List</Link>
+        </p>
       </div>
     );
   }
-
 }

@@ -2,6 +2,8 @@ import { Component } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Home from '../home/Home';
+import AlbumPage from '../albums/AlbumPage';
+import AlbumDetailPage from '../album/AlbumDetailPage';
 import {
   BrowserRouter as Router,
   Route,
@@ -26,15 +28,15 @@ class App extends Component {
                 )}
               />
 
-              <Route path="/resources" exact={true}
+              <Route path="/albums" exact={true}
                 render={routerProps => (
-                  <div>Implement a page of resources</div>
+                  <AlbumPage {...routerProps}/>
                 )}
               />
 
-              <Route path="/resources/:id"
+              <Route path="/albums/:id"
                 render={routerProps => (
-                  <div>Implement a page for id {routerProps.match.params.id}</div>
+                  <AlbumDetailPage {...routerProps}/>
                 )}
               />
 
