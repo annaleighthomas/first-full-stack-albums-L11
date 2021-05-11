@@ -13,3 +13,8 @@ export async function getAlbum(id) {
   const response = await request.get(`${URL}/${id}`);
   return response.body;
 }
+
+export async function addAlbum(album) {
+  const response = await (await request.post(URL)).statusType('json').send(album);
+  return response.body.id;
+}
