@@ -1,2 +1,2 @@
-/api/*  https://your-api-server.herokuapp.com/api/:splat
+/api/*  https://powerful-fjord-09218.herokuapp.com/:splat
 /*    /index.html   200
