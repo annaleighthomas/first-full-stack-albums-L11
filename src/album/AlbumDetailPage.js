@@ -1,39 +1,72 @@
 import { Component } from 'react';
-import { getAlbum } from '../utils/albums-api';
+import Loader from '../common/Loader';
+import { Link } from 'react-router-dom';
+import { getAlbum, deleteAlbum } from '../utils/albums-api';
 import './AlbumDetailPage.css';
 
 export default class AlbumsDetailPage extends Component {
   state = {
-    album: null
+    album: null,
+    loading: true
   }
   
   async componentDidMount() {
     const { match } = this.props;
-    const album = await getAlbum(match.params.id);
-    console.log('album', album);
-    if (album) {
+    try {
+      const album = await getAlbum(match.params.id);
       this.setState({ album: album });
     }
-    else {
-      console.log('No album received! Check id and network tab');
+    catch (err) {
+      console.log(err.message);
+    }
+    finally {
+      this.setState({ loading: false });
     }
   }
+  
 
-  render() {
+  handleDelete = async () => {
     const { album } = this.state;
+    const { history } = this.props;
+
+    const confirmation = `Are you sure you want to delete ${album.band}?`;
+    if (!window.confirm(confirmation)) { return; }
+
+    try {
+      this.setState({ loading: true });
+      await deleteAlbum(album.id);
+      history.push('/albums');
+    }
+    catch (err) {
+      console.log(err.message);
+      this.setState({ loading: false });
+    }
+  }
+    
+  render() {
+    const { album, loading } = this.state;
 
     if (!album) return null;
 
     return (
-      <div className="AlbumDetail">
-        <h2>Album Detail Page</h2>
+      <div className="AlbumDetailPage">
+        <Loader loading={loading}/>
 
-        <p>Band: {album.band}</p>
-        <p>Album: {album.album}</p>
-        <p>Year Released: {album.year}</p>
-        <p>Owner: {album.userName}</p>
+        <h2>{album.band}</h2>
 
+        <img src={album.img} alt={album.album}/>
+
+        <p>Released in: {album.year} </p>
+        <p>Genre: {album.genre}</p>
+
+        <Link to={`/albums/${album.id}/edit`}>
+          Edit this Album
+        </Link>
+
+        <button className="delete" onClick={this.handleDelete}>
+          Delete this Album
+        </button>
       </div>
-    );
+    ); 
   }
 }
