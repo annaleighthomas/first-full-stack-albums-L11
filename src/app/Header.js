@@ -13,6 +13,7 @@ class Header extends Component {
         <nav>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/albums">Albums</NavLink>
+          <NavLink to="/albums/add">Add Album</NavLink>
         </nav>
         
       </header>

@@ -3,17 +3,24 @@ import './AlbumForm.css';
 
 export default class AlbumForm extends Component {
   state = {
-    band: 'Quicksand',
-    album: 'Slip',
-    year: 1993,
-    genre: 'Post-Hardcore',
-    img: 'https://www.srcvinyl.com/media/catalog/product/cache/9/image/9df78eab33525d08d6e5fb8d27136e95/q/u/quicksand_1.jpg',
+    band: '',
+    album: '',
+    year: '',
+    genre: '',
+    img: '',
     isPlatinum: false
+  }
+
+  componentDidMount() {
+    const { albumName } = this.props;
+    if (!albumName) { return; }
+
+    this.setState(albumName);
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onEdit(this.state);
+    this.props.onSubmit(this.state);
   }
 
   handleChangeBand = ({ target }) => {
@@ -42,7 +49,8 @@ export default class AlbumForm extends Component {
 
   render() {
     const { band, album, year, genre, img, isPlatinum } = this.state;
-
+    const { albumName } = this.props;
+    
     return (
       <form className="AlbumForm" onSubmit={this.handleSubmit}>
         <p>
@@ -103,7 +111,7 @@ export default class AlbumForm extends Component {
         </p>
 
         <p>
-          <button>Add Album</button>
+          <button>{albumName ? 'Edit' : 'Add' } Album</button>
         </p>
 
       </form>

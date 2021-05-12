@@ -15,6 +15,16 @@ export async function getAlbum(id) {
 }
 
 export async function addAlbum(album) {
-  const response = await (await request.post(URL)).statusType('json').send(album);
-  return response.body.id;
+  const response = await request.post(URL).send(album);
+  return response.body;
+}
+
+export async function deleteAlbum(id) {
+  const response = await request.delete(`${URL}/${id}`);
+  return response.body;
+}
+
+export async function updateAlbum(album) {
+  const response = await request.put(`${URL}/${album.id}`).send(album);
+  return response.body;
 }
