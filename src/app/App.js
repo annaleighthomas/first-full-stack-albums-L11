@@ -4,6 +4,8 @@ import Footer from './Footer';
 import Home from '../home/Home';
 import AlbumPage from '../albums/AlbumPage';
 import AlbumDetailPage from '../album/AlbumDetailPage';
+import AlbumAddPage from '../add-page/AlbumAddPage';
+import AlbumEditPage from '../edit-page/AlbumEditPage';
 import {
   BrowserRouter as Router,
   Route,
@@ -34,9 +36,21 @@ class App extends Component {
                 )}
               />
 
-              <Route path="/albums/:id"
+              <Route path="/albums/add"
+                render={routerProps => (
+                  <AlbumAddPage {...routerProps}/>
+                )}
+              />
+
+              <Route path="/albums/:id" exact={true}
                 render={routerProps => (
                   <AlbumDetailPage {...routerProps}/>
+                )}
+              />
+
+              <Route path="/albums/:id/edit" exact={true}
+                render={routeProps => (
+                  <AlbumEditPage {...routeProps}/>
                 )}
               />
 
